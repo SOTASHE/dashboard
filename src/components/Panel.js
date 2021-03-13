@@ -20,7 +20,8 @@ function Panel(props) {
 
             {props.options && <div className="Container">
                 <form>
-                    TODO: capture defualt slected option
+                    {//TODO: capture defualt slected option
+                    }
                     <select id="category" name="category"
                         onChange={(e) => { props.selectedCategory(e.target.value) }}>
                         {props.options.map(item => <option key={item.id}>{item.title}</option>)}
