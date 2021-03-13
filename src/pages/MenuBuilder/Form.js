@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { v4 as uuidv4 } from "uuid";
-import './CategoryForm.css';
+import './Form.css';
 
 
-function CategoryForm(props) {
-    const [showModal, setShowModal] = useState(props.isOpen)
+function Form(props) {
+    const showModal = props.isOpen
     const [text, setText] = useState({
         title: '',
         description: '',
@@ -30,12 +30,12 @@ function CategoryForm(props) {
     return (
         <div>
             <Modal
-                isOpen={props.isOpen}
+                isOpen={showModal}
             >
 
-                <h2>New Category</h2>
+                <h2> New {props.title} </h2>
                 <form>
-                    <label for="title">Category Name</label>
+                    <label for="title">{props.title} Name</label>
                     <input name="title"
                         onChange={handleInput}></input>
 
@@ -45,6 +45,16 @@ function CategoryForm(props) {
 
                     </textarea>
 
+                    {
+                        props.title === "item" && (
+                            <div>
+                                <h3>Pricing</h3>
+                                <label>Item Price</label>
+                                <input type="number"></input>
+                            </div>
+                        )
+                    }
+
                 </form>
                 <button onClick={(e) => handleSubmit(e)}>Save</button>
                 <button>close</button>
@@ -52,4 +62,4 @@ function CategoryForm(props) {
         </div>
     );
 }
-export default CategoryForm;
+export default Form;

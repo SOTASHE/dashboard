@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import CategoryForm from '../pages/MenuBuilder/CategoryForm';
+import Form from '../pages/MenuBuilder/Form';
 import './Panel.css'
 
 function Panel(props) {
 
 
     if (props.isFormOpen) {
-        return <CategoryForm
+        return <Form
+            title={props.title}
             isOpen={props.isFormOpen}
             onSubmit={props.onFormSubmit}
 
@@ -22,7 +23,7 @@ function Panel(props) {
                 <form>
                     {//TODO: capture defualt slected option
                     }
-                    <select id="category" name="category"
+                    <select id="items" name="items"
                         onChange={(e) => { props.selectedCategory(e.target.value) }}>
                         {props.options.map(item => <option key={item.id}>{item.title}</option>)}
                     </select>

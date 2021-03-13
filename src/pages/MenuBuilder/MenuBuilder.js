@@ -37,6 +37,19 @@ class MenuBuilder extends React.Component {
         })
     }
 
+    addItem = (newItem) => {
+        this.setState(prevState => ({
+            categories: prevState.categories.map(
+                category => {
+                    if (category.title === this.state.activeCategory) {
+                        category.items.concat(newItem)
+                    }
+                    return category
+                }
+            )
+        }))
+    }
+
     render() {
 
         return (
@@ -45,7 +58,7 @@ class MenuBuilder extends React.Component {
                     btnText="Add New Menu"
                 />
 
-                <Panel title="categories"
+                <Panel title="category"
                     btnText="Add New Categories"
                     options={this.state.categories}
                     selectedCategory={this.setActiveCategory}
@@ -53,12 +66,15 @@ class MenuBuilder extends React.Component {
                     openForm={this.openForm}
                     onFormSubmit={this.createCategory} />
 
-                <Panel title="Menu Items"
+                <Panel title="item"
                     btnText="Add New Menu Item"
+                    openForm={this.openForm}
+                    onFormSubmit={this.addItem}
                     options={
                         this.state.activeCategory && this.state.categories.find(item => item.title === this.state.activeCategory
                         ).items
-                    } />
+                    }
+                />
             </div>
         )
     }
