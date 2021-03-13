@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import Dropdown from './Dropdown';
+import Form from '../pages/MenuBuilder/Form';
 import './Panel.css'
 
 function Panel(props) {
-    const [showMenu, setShowMenu] = useState(false)
 
-    const handleShowMenu = () => {
-        setShowMenu(!showMenu)
+
+
+    if (props.isFormOpen) {
+        return <Form
+            isOpen={props.isFormOpen}
+            onSubmit={props.onFormSubmit}
+
+        />
     }
-    return (
-        <div className="panel">
+    else {
+        return (<div className="panel">
             <div className="header">
                 <h3>{props.title}</h3>
             </div>
 
-            <button className="add-button">{props.btnText}</button>
+            {props.items && <div className="Container">
+                <form>
+                    <select id="country" name="country">
+                        {props.options.map(item => <option>{item.title}</option>)}
+                    </select>
+                </form>
+            </div>}
+
+            <button className="add-button"
+                onClick={props.openForm}>{props.btnText}</button>
             <div className="Container">
             </div>
         </div>
 
-    )
+        )
+    }
 }
 
 export default Panel;

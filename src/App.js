@@ -2,7 +2,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import MyMenus from './pages/MyMenu';
 import Orders from './pages/Orders';
-import MenuBuilder from './pages/MenuBuilder';
+import MenuBuilder from './pages/MenuBuilder/MenuBuilder';
 import Designer from './pages/Designer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
