@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from './Form';
 import Panel from '../../components/Panel';
 
 class MenuBuilder extends React.Component {
@@ -9,10 +8,11 @@ class MenuBuilder extends React.Component {
             categories: [{
                 id: 1,
                 title: "Drinks",
-                items: ["Coke", "something"]
+                items: [{ title: "coke" }, "something"]
             }
             ],
-            isFormOpen: false
+            isFormOpen: false,
+            activeCategory: null
         }
     }
 
@@ -29,8 +29,16 @@ class MenuBuilder extends React.Component {
         })
 
     }
+
+    setActiveCategory = (name) => {
+        // Returns name of selected category 
+        this.setState({
+            activeCategory: name
+        })
+    }
+
     render() {
-        console.log(this.state.isFormOpen)
+
         return (
             <div id="menubuild">
                 <Panel title="Menu"
@@ -40,12 +48,17 @@ class MenuBuilder extends React.Component {
                 <Panel title="categories"
                     btnText="Add New Categories"
                     options={this.state.categories}
+                    selectedCategory={this.setActiveCategory}
                     isFormOpen={this.state.isFormOpen}
                     openForm={this.openForm}
                     onFormSubmit={this.createCategory} />
 
                 <Panel title="Menu Items"
-                    btnText="Add New Menu Item" />
+                    btnText="Add New Menu Item"
+                    options={
+                        this.state.activeCategory && this.state.categories.find(item => item.title === this.state.activeCategory
+                        ).items
+                    } />
             </div>
         )
     }

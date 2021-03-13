@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { v4 as uuidv4 } from "uuid";
-import './Form.css';
+import './CategoryForm.css';
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
 
-function Form(props) {
+function CategoryForm(props) {
     const [showModal, setShowModal] = useState(props.isOpen)
     const [text, setText] = useState({
         title: '',
@@ -38,7 +28,7 @@ function Form(props) {
 
     }
     return (
-        <div style={customStyles}>
+        <div>
             <Modal
                 isOpen={props.isOpen}
             >
@@ -62,4 +52,4 @@ function Form(props) {
         </div>
     );
 }
-export default Form;
+export default CategoryForm;

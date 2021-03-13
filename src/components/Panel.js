@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import Form from '../pages/MenuBuilder/Form';
+import CategoryForm from '../pages/MenuBuilder/CategoryForm';
 import './Panel.css'
 
 function Panel(props) {
 
 
-
     if (props.isFormOpen) {
-        return <Form
+        return <CategoryForm
             isOpen={props.isFormOpen}
             onSubmit={props.onFormSubmit}
 
@@ -21,7 +20,9 @@ function Panel(props) {
 
             {props.options && <div className="Container">
                 <form>
-                    <select id="country" name="country">
+                    <select id="category" name="category"
+                        onStart={(e) => document.getElementById('category').selectedOptions[0].value}
+                        onChange={(e) => { props.selectedCategory(e.target.value) }}>
                         {props.options.map(item => <option key={item.id}>{item.title}</option>)}
                     </select>
                 </form>
@@ -31,7 +32,7 @@ function Panel(props) {
                 onClick={props.openForm}>{props.btnText}</button>
             <div className="Container">
             </div>
-        </div>
+        </div >
 
         )
     }
