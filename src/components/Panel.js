@@ -19,10 +19,10 @@ function Panel(props) {
                 <h3>{props.title}</h3>
             </div>
 
-            {props.items && <div className="Container">
+            {props.options && <div className="Container">
                 <form>
                     <select id="country" name="country">
-                        {props.options.map(item => <option>{item.title}</option>)}
+                        {props.options.map(item => <option key={item.id}>{item.title}</option>)}
                     </select>
                 </form>
             </div>}
