@@ -6,9 +6,35 @@ class MenuBuilder extends React.Component {
         super(props);
         this.state = {
             categories: [{
+                id: 0,
+                title: "Choose / Add Category",
+
+            }, {
                 id: 1,
                 title: "Drinks",
-                items: [{ title: "coke" }, "something"]
+                items: [{
+                    id: 0,
+                    title: "coke",
+                    cost: "R20",
+                }, {
+                    id: 1,
+                    title: "Spirit",
+                    cost: "R23"
+                }]
+            }, {
+                id: 2,
+                title: "Breakfast",
+                items: [{
+                    id: 0,
+                    title: "Egg and Something",
+                    cost: "R45"
+                }, {
+                    id: 1,
+                    title: "Steak and another steak"
+                }, {
+                    id: 2,
+                    title: "nothing but another steak"
+                }]
             }
             ],
             isFormOpen: false,
@@ -16,11 +42,13 @@ class MenuBuilder extends React.Component {
         }
     }
 
-    openForm = () => {
+    handleForm = () => {
         this.setState(prevState => ({
             isFormOpen: !prevState.isFormOpen
         }))
     }
+
+
 
     createCategory = (newCategory) => {
         this.setState({
@@ -63,18 +91,20 @@ class MenuBuilder extends React.Component {
                     options={this.state.categories}
                     selectedCategory={this.setActiveCategory}
                     isFormOpen={this.state.isFormOpen}
-                    openForm={this.openForm}
+                    handleForm={this.handleForm}
                     onFormSubmit={this.createCategory} />
 
                 <Panel title="item"
                     btnText="Add New Menu Item"
-                    openForm={this.openForm}
+                    handleForm={this.handleForm}
+                    isFormOpen={this.state.isFormOpen}
                     onFormSubmit={this.addItem}
                     options={
                         this.state.activeCategory && this.state.categories.find(item => item.title === this.state.activeCategory
                         ).items
                     }
                 />
+
             </div>
         )
     }

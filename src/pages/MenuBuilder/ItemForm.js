@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { v4 as uuidv4 } from "uuid";
-import './Form.css';
 
 
-function Form(props) {
-    const showModal = props.isOpen
+
+function ItemForm(props) {
+    const [showModal, setShowModal] = useState(props.isOpen)
     const [text, setText] = useState({
         title: '',
         description: '',
@@ -18,7 +18,7 @@ function Form(props) {
         }))
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         const uniqueId = uuidv4();
         props.onSubmit({
             id: props.id ? props.id : uniqueId,
@@ -27,6 +27,12 @@ function Form(props) {
         })
 
     }
+
+    const handleForm = () => {
+        setShowModal(!props.isOpen)
+    }
+
+    console.log(props.title)
     return (
         <div>
             <Modal
@@ -44,22 +50,17 @@ function Form(props) {
                         onChange={handleInput}>
 
                     </textarea>
-
-                    {
-                        props.title === "item" && (
-                            <div>
-                                <h3>Pricing</h3>
-                                <label>Item Price</label>
-                                <input type="number"></input>
-                            </div>
-                        )
-                    }
+                    <div>
+                        <h3>Pricing</h3>
+                        <label>Item Price</label>
+                        <input type="number"></input>
+                    </div>
 
                 </form>
                 <button onClick={(e) => handleSubmit(e)}>Save</button>
-                <button>close</button>
+
             </Modal>
         </div>
     );
 }
-export default Form;
+export default ItemForm;

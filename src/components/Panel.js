@@ -1,17 +1,24 @@
 import React from 'react';
-import Form from '../pages/MenuBuilder/Form';
+import CategoryForm from '../pages/MenuBuilder/CategoryForm';
+import ItemForm from '../pages/MenuBuilder/ItemForm';
 import './Panel.css'
 
 function Panel(props) {
 
-
+    console.log(props.title)
     if (props.isFormOpen) {
-        return <Form
+
+        return (props.title === "item" ? <ItemForm
             title={props.title}
             isOpen={props.isFormOpen}
             onSubmit={props.onFormSubmit}
-
-        />
+            onClose={props.onFormClose}
+        /> : <CategoryForm
+            title={props.title}
+            isOpen={props.isFormOpen}
+            onSubmit={props.onFormSubmit}
+            onClose={props.onFormClose}
+        />)
     }
     else {
         return (<div className="panel">
@@ -21,17 +28,22 @@ function Panel(props) {
 
             {props.options && <div className="Container">
                 <form>
-                    {//TODO: capture defualt slected option
+                    {
+                        props.title === "category" ? <select id="items" name="items"
+                            onChange={(e) => { props.selectedCategory(e.target.value) }}>
+                            {props.options.map(item => <option key={item.id}>{item.title}</option>)}
+                        </select> : (
+                            <ul>
+                                {props.options.map(item => <li key={item.id}>{item.title}
+                                    <span>{item.cost}</span></li>)}
+                            </ul>
+                        )
                     }
-                    <select id="items" name="items"
-                        onChange={(e) => { props.selectedCategory(e.target.value) }}>
-                        {props.options.map(item => <option key={item.id}>{item.title}</option>)}
-                    </select>
                 </form>
             </div>}
 
             <button className="add-button"
-                onClick={props.openForm}>{props.btnText}</button>
+                onClick={props.handleForm}>{props.btnText}</button>
             <div className="Container">
             </div>
         </div >
