@@ -12,7 +12,7 @@ function Panel(props) {
             title={props.title}
             isOpen={props.isFormOpen}
             onSubmit={props.onFormSubmit}
-            onClose={props.onFormClose}
+            onClose={props.onHandleForm}
         /> : <CategoryForm
             title={props.title}
             isOpen={props.isFormOpen}

@@ -28,11 +28,6 @@ function ItemForm(props) {
 
     }
 
-    const handleForm = () => {
-        setShowModal(!props.isOpen)
-    }
-
-    console.log(props.title)
     return (
         <div>
             <Modal

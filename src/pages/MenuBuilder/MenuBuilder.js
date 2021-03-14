@@ -66,6 +66,7 @@ class MenuBuilder extends React.Component {
     }
 
     addItem = (newItem) => {
+        console.log("added")
         this.setState(prevState => ({
             categories: prevState.categories.map(
                 category => {
@@ -76,6 +77,8 @@ class MenuBuilder extends React.Component {
                 }
             )
         }))
+
+        this.setState({ isFormOpen: false })
     }
 
     render() {
